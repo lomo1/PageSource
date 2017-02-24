@@ -3,6 +3,10 @@ var gulp = require('gulp');
 
 var HEXO = require('./hexoAutoDoSth');
 
+// var browserSync = require("browser-sync").create();
+// var reload = browserSync.reload;
+
+
 //定义多个单独任务
 
 gulp.task('Clear', function(){
@@ -26,7 +30,7 @@ gulp.task('Deploy', function(){
 });
 
 gulp.task('BrowserSync', function(){
-    HEXO.browserSync();
+    HEXO.browserSync(); //Todo
 });
 
 //Default 方法
@@ -36,4 +40,11 @@ gulp.task('default', function(){
     //     // gulp.run('Clear', 'StartServer'); //后续添加刷新浏览器操作
     // });
     //目前当不用watch 本地修改md文件后，直接手动刷新浏览器即可查看最新修改？
+    gulp.watch("source/_posts/*.md", function(){
+        console.log("有文件变更了......");  //现已能监测到文件被修改或变化
+        gulp.run('BrowserSync');
+    });
+
+    
+    
 });
