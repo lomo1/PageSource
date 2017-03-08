@@ -2,7 +2,7 @@
 title: 使用GitHub Pages创建个人博客
 date: 2016-06-21 23:33:02
 tags: [blog,GitHub,Hexo]
-categories: 学习 # 配置categories
+categories: essay # 配置categories
 description:
 ---
 基于GitHub Pages 加上自己的域名lomo.space创建个人博客，并将博客相关数据、文件免费托管于Github. 2013年左右时，个人博客是基于WordPress二次开发并自己购买空间、域名进行第三方付费托管于维护。
