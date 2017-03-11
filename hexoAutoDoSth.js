@@ -15,7 +15,7 @@ module.exports = {
     },
     startServer: function(){
         //do hexo s
-        var cmd = "hexo s -o -p 4001";
+        var cmd = "hexo s -o -p 4000";
         this.executeCmd(cmd);
     },
     deployTo: function(){
@@ -29,7 +29,7 @@ module.exports = {
         // var cmd = "browser-sync start --proxy 'localhost:4001' '/public/**'";
         // this.executeCmd(cmd);
         //Todo ,暂时未解决实时自动刷新
-        var cmd = "browser-sync reload --url https://localhost:4001 --files='./public/'";
+        var cmd = "browser-sync reload --url https://localhost:4000 --files='./public/'";
         this.executeCmd(cmd);
     },
     executeCmd: function(s){

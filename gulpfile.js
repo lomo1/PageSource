@@ -42,7 +42,7 @@ gulp.task('default', function(){
     //目前当不用watch 本地修改md文件后，直接手动刷新浏览器即可查看最新修改？
     gulp.watch("source/_posts/*.md", function(){
         console.log("有文件变更了......");  //现已能监测到文件被修改或变化
-        gulp.run('BrowserSync');
+        // gulp.run('BrowserSync');
     });
 
     

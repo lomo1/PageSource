@@ -16,7 +16,7 @@ $ npm install -g hexo-cli #全局安装cli
 $ hexo init +文件夹名
 ```
 init过程可能遇到NPM warning 级别错误，提示deprecated swig的错误：
-    ![img](/source/img/node-swig-error.png)
+    ![img](http://oluzh4sa6.bkt.clouddn.com/GitHubPages/article/node-swig-error.png)
 
 解决方案：
 ` npm install swig@latest `
