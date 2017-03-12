@@ -3,6 +3,7 @@ title: Java Class and Object
 date: 2016-11-11 22:25:18
 tags: [java]
 categories: study
+description: Java类与对象, 类对象初始化顺序, TestNG原理
 ---
 
 ##  Java类和对象[学习笔记]
@@ -346,6 +347,10 @@ java Main("");
 ## 均无法运行
 ```
 
+关于Java main函数解析还可参考博文:
+
+    http://www.cnblogs.com/xwdreamer/archive/2012/04/09/2438845.html
+
 #### 附:无main函数运行Java代码
 
  ***问题：***
@@ -432,5 +437,123 @@ Total tests run: 2, Failures: 0, Skips: 0
 ===============================================
 ```
 
+##### TestNG运行原理?
+
+> 思考🤔: TestNG如何实现Java无main函数运行代码的? 
+
+首先简单从`@Test` 作为入口，找到TestNG的`annotations`, 或者从测试方法的import包里找到TestNG的annotations包: `import org.testng.annotations`
+
+可以看到org.testng包里除了annotations包外还有其它包: 断言asserts、log、junit、log4testng、xml...等等的包.
+
+进入annotations包，发现很多编译好的 `.class` 文件，找到其中之一`Test.class`, 双击进入
+
+```Java
+package org.testng.annotations;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD, ElementType.TYPE, ElementType.CONSTRUCTOR})
+public @interface Test {
+    String[] groups() default {};
+
+    boolean enabled() default true;
+
+    /** @deprecated */
+    @Deprecated
+    String[] parameters() default {};
+
+    String[] dependsOnGroups() default {};
+
+    String[] dependsOnMethods() default {};
+
+    long timeOut() default 0L;
+
+    long invocationTimeOut() default 0L;
+
+    int invocationCount() default 1;
+
+    int threadPoolSize() default 0;
+
+    int successPercentage() default 100;
+
+    String dataProvider() default "";
+
+    Class<?> dataProviderClass() default Object.class;
+
+    boolean alwaysRun() default false;
+
+    String description() default "";
+
+    Class[] expectedExceptions() default {};
+
+    String expectedExceptionsMessageRegExp() default ".*";
+
+    String suiteName() default "";
+
+    String testName() default "";
+
+    /** @deprecated */
+    boolean sequential() default false;
+
+    boolean singleThreaded() default false;
+
+    Class retryAnalyzer() default Class.class;
+
+    boolean skipFailedInvocations() default false;
+
+    boolean ignoreMissingDependencies() default false;
+
+    int priority() default 0;
+}
+```
+
+> **分析**
+
+> 先粗糙地分析下，***待学完Java注解Anonation、反射等之后再深入总结下***.
+
+> 根据其import的包是 `java.lang.annotation`, 就可以断言，TestNG的 @Test模式肯定也是基于Java的注解模式来实现无main函数运行的.
+
+> 接着简单说说Test方法前3行代码:
+
+```Java
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD, ElementType.TYPE, ElementType.CONSTRUCTOR})
+public @interface Test
+```
+
+> 1)Retention， 保留， 表示在什么级别保留此信息
+
+`SOURCE:源码注解，注解仅存在代码中，注解会被编译器丢弃`
+
+`CLASS:编译时注解，注解会在class文件中保留，但会被JVM丢弃`
+
+`RUNTIME:运行时注解，VM运行期间也会保留该注解，因此**可以通过反射来获得该注解**`
+
+> 2)Target，表示作用域，可能的ElementType参数包括：
+
+`CONSTRUCTOR:构造方法声明`
+
+`FIELD:字段声明`
+
+`LOCAL_VARIABLE:局部变量声明`
+
+`METHOD:方法声明`
+
+`PACKAGE:包声明`
+
+`PARAMETER:参数声明`
+
+`TYPE:类，接口或enum声明`
+
+
+> Test接口中，提供了很多 `@Test` 注解使用的属性，`@Test`标记一个类或方法作为测试的一部分。关于Test接口的详细属性列表参考：
+
+> http://testng.org/doc/documentation-main.html#annotations
+
+**小结**: TestNG 实现无main函数执行，是基于Java的注解，深究后续继续学习记录笔记.
 
 Done!
