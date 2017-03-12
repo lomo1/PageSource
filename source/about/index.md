@@ -1,9 +1,31 @@
 ---
 title: About Me
 date: 2010-12-21 00:10:01
+tag: 
+description: self introduction
 ---
 
 ## About Lomo
+
+
+### ↔️座右铭↔️
+
+「你的水平决定了你遇见的人的水平」
+
+
+> &nbsp;&nbsp;&nbsp;你自己都不够好，你凭什么要求你遇见的人怎样！
+
+「你现在的气质里，藏着你走过的路，读过的书和爱过的人」
+
+
+「真正牛逼的，不是那些可以随口拿来夸耀的事迹，而是那些在困境中依然保持微笑的凡人」
+
+<div align='center'>
+    <img width="450" height="350" src="http://oluzh4sa6.bkt.clouddn.com/GitHubPages/article/tomorrow.jpeg" />
+    <br>
+</div>
+
+- - -
 
 ### 📚书
 
@@ -45,3 +67,14 @@ I am word In JDB Now ~_~
 PHP开发、前端开发(H5+CSS3+JS)、Java、NodeJS，都可以搞起来，恩，主要就是这几门语言熟一些。
 
 未来想向AI、物联网方向走，有机会要去探探路，求带！！！
+
+<br>
+* * *
+
+> 长大后，踏上火车的那一刻还没有意识到，从此后，故乡只有冬，再无春夏秋.
+
+<div align="center">
+    <img src="http://oluzh4sa6.bkt.clouddn.com/GitHubPages/article/hometown.jpeg" />
+    <br>
+</div>
+ 
