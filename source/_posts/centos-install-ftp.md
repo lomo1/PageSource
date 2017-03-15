@@ -3,7 +3,7 @@ title: CentOS 6.5 安装FTP
 date: 2016-12-21 12:33:02
 tags: [CentOS,FTP]
 categories: study
-description: 
+description: CentOS安装FTP及其基本配置
 ---
 记录下在CentOS 6.5上安装FTP的过程及其注意事项.
 
