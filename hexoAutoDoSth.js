@@ -1,5 +1,6 @@
 
 var exec = require('child_process').exec;
+
 module.exports = {
 
     clear: function(){
@@ -29,7 +30,9 @@ module.exports = {
         // var cmd = "browser-sync start --proxy 'localhost:4001' '/public/**'";
         // this.executeCmd(cmd);
         //Todo ,暂时未解决实时自动刷新
-        var cmd = "browser-sync reload --url https://localhost:4000 --files='./public/'";
+        // var cmd = 'browser-sync start --proxy "http://localhost:4000/" --file "public/**"';
+        var cmd = 'cd public && browser-sync start --server --files "**"';
+        // var cmd = 'cd public && browser-sync start --proxy "http://localhost:4000/" --file "**"';
         this.executeCmd(cmd);
     },
     executeCmd: function(s){
@@ -38,6 +41,7 @@ module.exports = {
                 console.log(err);
             }else{
                 console.log(stdout);
+                // return stdout;
             }
         });
     }
