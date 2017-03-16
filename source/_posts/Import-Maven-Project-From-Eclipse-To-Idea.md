@@ -8,12 +8,14 @@ description: 快速将Maven项目导入intelliJ IDEA
 
 ## Eclipse Maven项目迁移至IntelliJ IDEA
 
-### 前置工作
 
 > 操作系统： Mac OSX
 
 
-### Brew安装
+### 前置工作 -- 安装IDEA
+
+
+### 通过Brew安装IDEA(one way)
 > 下载安装(通过Brew安装)
 
 ```bash
@@ -27,7 +29,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 ```
 
 
-### .dmg安装
+### .dmg安装IDEA(another way)
 
 安装程序文件下载地址：
 
@@ -76,7 +78,7 @@ IDEA官网：
 `https://www.jetbrains.com/idea/`
 
 
-### 工程迁移
+### Maven工程迁移
 
 上述IDEA安装完毕后，即可放心地开始Maven工程迁移至IDEA.
 
