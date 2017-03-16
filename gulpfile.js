@@ -60,12 +60,15 @@ gulp.task('default', function(){
     gulp.watch("./source/*", function(){
         console.log("  Blog .md源文件已发生变更...即刻开始重新Build生成并更新页面内容...");
         gulp.run('Generate');
+
     });
 
-    gulp.watch(['./themes/jacman/_config.yml', './themes/jacman/source', './themes/jacman/layout'], function(){
-        console.log("  主题Themes相关配置源文件已发生变更...即刻开始重新Build生成并更新页面样式、内容...");
-        gulp.run('Generate');
-    });
+    // gulp.watch(['./themes/jacman/_config.yml', './themes/jacman/source', './themes/jacman/layout'], function(){
+    //     console.log("  主题Themes相关配置源文件已发生变更...即刻开始重新Build生成并更新页面样式、内容...");
+    //     gulp.run('Generate');
+    // });
+
+    //gulp.watch("./public/*").on("change", reload);
 
 });
 
