@@ -15,7 +15,7 @@ description: 快速将Maven项目导入intelliJ IDEA
 ### 前置工作 -- 安装IDEA
 
 
-### 通过Brew安装IDEA(one way)
+#### 通过Brew安装IDEA(one way)
 > 下载安装(通过Brew安装)
 
 ```bash
@@ -29,7 +29,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 ```
 
 
-### .dmg安装IDEA(another way)
+#### .dmg安装IDEA(another way)
 
 安装程序文件下载地址：
 
@@ -40,7 +40,9 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 
 #### 激活IDEA
 
-#### License授权激活
+> 两种方式都可以激活使用.
+
+##### License授权激活
 
 > 通常License激活有效期为**1年**
 
@@ -56,7 +58,7 @@ http://idea.lanyus.com/
 
 ```
 
-#### 本地破解激活
+##### 本地破解激活
 
 破解补丁下载：
 
