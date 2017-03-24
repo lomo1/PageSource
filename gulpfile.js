@@ -1,4 +1,3 @@
-
 var gulp = require('gulp');
 
 var HEXO = require('./hexoAutoDoSth');
@@ -7,18 +6,16 @@ var livereload = require('gulp-livereload');
 
 var browserSync = require('browser-sync').create();
 
-// var browserSync = require("browser-sync").create();
 var reload = browserSync.reload;
-
 
 //定义多个单独任务
 
-gulp.task('Clear', function(){
+gulp.task('Clear', function() {
     console.log(" 开始清除本地旧的public文件...");
     HEXO.clear();
 });
 
-gulp.task('Generate', function(){
+gulp.task('Generate', function() {
     console.log(" 重新生成本地静态文件[public] ...");
     HEXO.generate();
 });
@@ -26,23 +23,23 @@ gulp.task('Generate', function(){
 /**
  * Hexo 提供本地Server服务
  */
-gulp.task('StartServer', function(){
+gulp.task('StartServer', function() {
     console.log(" 开启本地服务器...");
     HEXO.startServer();
 });
 
-gulp.task('Deploy', function(){
+gulp.task('Deploy', function() {
     console.log(" 开始将本地静态文件推送至远程服务器...");
     HEXO.deployTo();
 });
 
 /** Deprecated */
-gulp.task('BrowserSync', function(){
+gulp.task('BrowserSync', function() {
     HEXO.browserSync(); //Todo
 });
 
 /** 监听public文件夹下的所有文件，一旦有变更立刻刷新页面展示最新修改效果 */
-gulp.task('serve', function () {
+gulp.task('serve', function() {
 
     browserSync.init({
         server: {
@@ -54,25 +51,27 @@ gulp.task('serve', function () {
 });
 
 //Gulp -- Default 方法
-gulp.task('default', function(){
+gulp.task('default', function() {
     gulp.run('Clear', 'Generate', 'StartServer', 'serve');
 
-    gulp.watch("./source/*", function(){
+    gulp.watch("./source/*", function() {
         console.log("  Blog .md源文件已发生变更...即刻开始重新Build生成并更新页面内容...");
         gulp.run('Generate');
 
     });
 
-    // gulp.watch(['./themes/jacman/_config.yml', './themes/jacman/source', './themes/jacman/layout'], function(){
-    //     console.log("  主题Themes相关配置源文件已发生变更...即刻开始重新Build生成并更新页面样式、内容...");
-    //     gulp.run('Generate');
-    // });
+    gulp.watch(['./themes/jacman/_config.yml', './themes/jacman/source', './themes/jacman/layout'], function() {
+        console.log("  主题Themes相关配置源文件已发生变更...即刻开始重新Build生成并更新页面样式、内容...");
+        gulp.run('Generate');
+    });
 
-    //gulp.watch("./public/*").on("change", reload);
+    // gulp.watch("./public/*", function() {
+    //     console.log("public变化了.......!!!!!");
+    // }).on("change", reload);
 
 });
 
-gulp.task('help', function(){
+gulp.task('help', function() {
     console.log("=========================Gulp Help Start==========================");
     console.log("   gulp Clear       ==> 清除本地已有静态文件和db.json文件    ");
     console.log("   gulp Generate    ==> 重新生成静态页面文件和db.json文件    ");
@@ -112,4 +111,3 @@ gulp.task('help', function(){
 
 //本机apache根目录设置为: /Users/lomo/Sites/
 //将Blog整个目录放入机器的Apache等服务目录下，不用hexo开启server，使用browser-sync启动并监听，当.md文件变化时，自动执行hexo g然后刷新页面
-
