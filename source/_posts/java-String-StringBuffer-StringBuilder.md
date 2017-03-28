@@ -24,7 +24,7 @@ description: Java数据类型, String类, ==与equals区别
 
 >String类型数据 声明初始化时 使用双引号 ` "" `
 
-> String不是基本数据类型；它是由final修饰的，所以也不可以继承；
+> **String不是基本数据类型**；它是由final修饰的，所以也不可以继承；
 
 > String类型变量的2种赋值方式:
 ```java
@@ -213,9 +213,24 @@ Object类的equals源码：
 
 > StringBuffer、StringBuilder，使用`equal`或 `==` 比较时，使用的Object的equals方法，比较是否为同一个对象，即 类型+值的比较；
 
-> String类重写了Object类的equals方法，使用equals比较时，只比较值是否相等；==比较是否为同一个对象，比较类型+值。
+> 这三个String、StringBuilder、StringBuffer里**只有String类重写**了Object类的equals方法，使用equals比较时，只比较值是否相等；==比较是否为同一个对象，比较类型+值。
 
-#### 自定义类型
+> Double、Integer、Long这些包装类数据类型都重写了`Object`类的equals方法和hashCode方法, 进而其比较的是值内容!
+
+> 总之，只有String类重写了Object的equals和hashCode方法使其用equals比较时只比较值内容是否相等!!!
+
+==>>
+
+[再次啰嗦总结]
+
+八种包装数据类型：Integer、Short、Float、Double、Long、Byte、Boolean、Character 都重写了Object的equals方法，它们声明的变量使用equals比较时，都比较值的内容；
+
+而对于`String、StringBuilder、StringBuffer`类型，只有String重写了`Object`类的equals方法，使用equals比较时(或使用 == 比较)只有String类型的比较值内容，其它两个比较都是类型+内容！
+
+对于**基本数据类型**: int、double、float、char等比较，都是值比较.
+<br>
+
+#### 如何自定义类型
 
 > 自造数据类型
 
