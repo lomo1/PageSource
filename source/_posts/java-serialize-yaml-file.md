@@ -2,7 +2,7 @@
 title: java serialize yaml file
 date: 2017-01-21 23:51:41
 tags: [java, yaml]
-categories: [study]
+categories: study
 description: Java序列化yaml文件
 ---
 

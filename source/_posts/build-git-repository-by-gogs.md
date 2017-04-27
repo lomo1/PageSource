@@ -1,8 +1,9 @@
 ---
-title: create git by gogs
+title: Establish Git Repository By Gogs
 date: 2016-03-10 16:22:55
-tags: [gogs,git]
+tags: [gogs, git]
 categories: essay
+description: 快速搭建一个Git仓库服务系统
 ---
 
 ## 搭建内网Git仓库
@@ -10,7 +11,10 @@ categories: essay
 ### Introduce
 快速搭建内网或公司内部版的GitHub?
 
->Gogs, Google版GitHub.
+> Gogs, Google版GitHub. Gogs基于Go语言开发.
+> Gogs 的目标是打造一个最简单、最快速和最轻松的方式搭建自助 Git 服务。使用 Go 语言开发使得 Gogs 能够通过独立的二进制分发，并且支持 Go 语言支持的 所有平台，包括 Linux、Mac OS X、Windows 以及 ARM 平台
+
+> 一个树莓派的硬件配置即可使用Gogs快速搭建Git服务系统，便捷、快速、节省成本！！！
 
 ### 本地尝鲜
 
@@ -109,41 +113,28 @@ REQUIRE_SIGNIN_VIEW    = true
 
 
 ### CentOS 升级Gogs
-
 1. 查看更新log决定是否更新：
-
 > https://gogs.io/docs/intro/change_log
 
-<br>
 2. 官网下载最新Gogs二进制安装包
-<br>
-3. 备份旧版本gogs，解压新版本gogs
+> https://gogs.io/docs/installation/install_from_binary
 
+3. 备份旧版本整个gogs文件夹(以备不测)，解压新版本gogs
 > 按照官网说法，只需要删除旧版本的templates文件夹，并用最新版本的templates覆盖，经过测试，是有问题和bug的，所以现小记自己的升级更新之笔记.
 
-<br>
-4. 经过上述操作完毕后, 备份/gogs根目录下的以下文件夹:
+4. 经过上述操作完毕后, 可以单独备份/gogs根目录下的以下文件夹(alternative):
+> 二进制可执行文件 gogs/gogs 
+> [ 如果服务启动运行中,需要停止服务,否则会提示 'Text file busy'导致无法拷贝粘贴文件,使用 fuser /xx/xx/filename 查看进程ID并kill -9 ID即可 ]
+> gogs/public 文件夹
+> gogs/templates 文件夹
+> gogs/scriptes 文件夹
 
-> 二进制可执行文件 gogs
-
-> public 文件夹
-
-> templates文件夹
-
-> scriptes文件夹
-
-<br>
 5. 备份完毕，用最新版的对应文件替换上面备份过的文件夹即可。
-
 > **二进制gogs可执行文件一定要更新，否则nohup.out文件里会提示相应错误**
 
-<br>
 6. 说明:
-
 > templates 存放的都是前端模板 .tmpl文件，用来渲染数据
-
 > public里面存的是最新样式相关资源js/css/img等, 【更新时需要同时更新，避免使用了新的CSS资源导致页面显示问题】
-
 > 更新这些文件夹，基本不用kill之前开启的gog服务进程, 直接覆盖即可.
 
 ![img](http://oluzh4sa6.bkt.clouddn.com/GitHubPages/article/gogs_upgrade_bk.png)

@@ -1,7 +1,7 @@
 ---
 title: Java Singleton Patterns
 date: 2016-03-26 19:00:37
-tags: [Java, DesignPatterns]
+tags: [java, DesignPatterns]
 categories: study
 description: Java设计模式之单例模式
 ---

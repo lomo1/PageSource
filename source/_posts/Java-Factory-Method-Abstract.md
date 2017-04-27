@@ -1,7 +1,7 @@
 ---
 title: Java Factory Method Abstract
 date: 2016-03-26 18:41:11
-tags: [Java,DesignPatterns]
+tags: [java,DesignPatterns]
 categories: study
 description: Java设计模式之抽象工厂模式
 ---

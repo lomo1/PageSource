@@ -1,7 +1,7 @@
 ---
 title: Java Factory Method
 date: 2016-03-25 18:36:53
-tags: [Java, DesignPatterns]
+tags: [java, DesignPatterns]
 categories: study
 description: Java设计模式之工厂模式, 一般工厂, 多工厂, 静态工厂
 ---

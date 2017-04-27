@@ -1,7 +1,7 @@
 ---
 title: java references type sort
 date: 2017-02-17 16:41:58
-tags: [java]
+tags: java
 categories: study
 description: Java Arrays类及引用类型排序
 ---

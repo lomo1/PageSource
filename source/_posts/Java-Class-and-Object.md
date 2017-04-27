@@ -307,49 +307,78 @@ Build b2 = new Build();  //见下边的总结6）
 
 个人 + 网上各类博客文章 总结：
 
-> 	main方法是Java解释器调用，那时候还未产生任何对象，程序入口，必须提前加载好；
-	static修饰的类属性可以直接使用，而无需new一个实例化对象来去调用；
-	[可以没有main方法而去执行Java代码]
+> 运行Java应用程序时，需要依赖JVM的运行。
+
+> 当 Run某个类时，会启动虚拟机去执行该类中的main方法. JVM运行Java应用程序时，首先会去调用main方法, 而不必实例化main函数所在的这个类
+(不用去new一个对象), 通过类名来调用需要限制为`public`, 同时JVM规定main函数不能有返回值，因此返回类型为`void`.
+
+此外，main方法是Java解释器调用，那时候还未产生任何对象，作为程序的入口，必须提前加载好；[main是一个可以被JVM识别的特殊单词，而不是关键字]
+	static修饰的类属性可以直接使用，而无需new一个实例化对象去调用；
+
+> [可以没有main方法而去执行Java代码]
 
 
 ##### Q2
 
 > Java中main函数为何必须使用String[] args形式的不定参数(数组作为参数)？
 
-A: 
-
-&emsp;&emsp;正确解释: 按照Java规定入口函数必须这样写，就这么记！！而且参数必须为String类实例化的数组.
-
-刚开始，查阅网上一些资料解释如下（不正确）:
-&emsp;&emsp; main方法里面的args的参数原来是接收的java运行参数。
-
-***证明***:
-
-```Java
+A: 程序运行时, JVM会首先调用`main`函数，而`main`函数传入的是String数组，示例
+```java
 public class Main {
 
-    public static void main(String[] args) {
-        for (String str : args) {
-            System.out.println(str);
-        }
+    public static void main(String[] args) throws Exception{
+        System.out.println(args);
     }
 }
-//直接在IDE中编译运行，无任何输出
+// 运行输出：[Ljava.lang.String;@21780f30
+// 每次运行发现@后的字符串值都不一样!
+``` 
 
+修改输出
+```java
+System.out.println(args.length);
+// 输出为0，说明传入的实体数组长度为0(实体数组而非null !!!), 相当于传入的是 `new String[0]`
 ```
-> 进入终端 使用javac 进行编译
 
+尝试输出数组某个值
+```java
+System.out.println(args[0]);
+```
+运行，报错 `Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 0`, 越界错误❌. 
+
+说明args这个数组中没有元素啊！！！那JVM传递这个实体数组干什么？
+
+```java
+public class TestMain {
+    public static void main(String[] args) throws Exception{
+        for(int i=0;i<args.length;i++)
+            System.out.println(args[i]);
+    }
+}
+```
+在终端，进入该.java文件所在目录，然后 `javac` 编译该文件, 产生一个执行的class文件.
+
+然后，我们使用java命令运行该测试类，并传入参数 1 2 4
+
+> 如果，该函数在某一个包下，则终端路径需要回退到包目录去执行，类似于
 ```bash
-lomo@LomodeMacBook-Pro:~/javaStudy/src/javaClassExercise % javac Main.java
-# 编译完成生成一下Main.class文件.
-java Main(1);
-java Main("");
-## 均无法运行
+javaStudy/src % java javaClassExercise.TestMain 1 2 4
+#输出: 
+# 1
+# 2
+# 4
 ```
+使用`java`命令调用虚拟机，并手动传入值，调用方式：java 类名 参数。同时，JVM将类后面的这些数据存入了数组！
 
-关于Java main函数解析还可参考博文:
+> main方法里面的args的参数原来是接收的java运行参数。
 
-    http://www.cnblogs.com/xwdreamer/archive/2012/04/09/2438845.html
+> 可简单认为 -- 解释: 按照Java规定入口函数必须这样写，就这么记！！而且参数必须为String类实例化的数组.
+
+
+关于Java main函数相关解析还可参考博文:
+
+> http://stackoverflow.com/questions/146576/why-is-the-java-main-method-static
+> http://www.cnblogs.com/xwdreamer/archive/2012/04/09/2438845.html
 
 #### 附:无main函数运行Java代码
 
