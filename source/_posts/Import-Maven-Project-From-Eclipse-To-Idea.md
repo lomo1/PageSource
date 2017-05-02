@@ -100,3 +100,7 @@ IDEA官网：
 
 
 > 按照图中红色框框中标示的 绿色`+` 加号，一次点击加入工程的`pom.xml` 即可，IDEA会在后台根据pom自动更新依赖.
+
+
+### 后续
+> 如果中央仓库更新后，本地`git fetch origin/master`, 然后 `git merge origin/master`后，idea显示某些包飘红，或提示 'can not resolve symbol', 点击idea右侧 `Maven Porject`，然后点击`Reimport All Maven Project` 逆时针按钮即可。

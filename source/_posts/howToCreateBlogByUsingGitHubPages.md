@@ -5,9 +5,12 @@ tags: [blog,GitHub,Hexo]
 categories: essay # 配置categories
 description:
 ---
+
+## 基于Hexo+Pages创建Blog
+
 基于GitHub Pages 加上自己的域名lomo.space创建个人博客，并将博客相关数据、文件免费托管于Github. 2013年左右时，个人博客是基于WordPress二次开发并自己购买空间、域名进行第三方付费托管于维护。
 
-## 【第一部分】安装 Hexo + 服务 + 各类依赖
+### 【第一部分】安装 Hexo + 服务 + 各类依赖
 ``` bash
 $ npm install -g hexo-cli #全局安装cli
 ```
