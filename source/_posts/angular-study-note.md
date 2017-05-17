@@ -67,6 +67,24 @@ ng-controller 定义了控制器。
 
  大括号 {{var}}
 
+> 当使用expression表达式来输出数据时，为了防止加载过程中页面显示表达式问题，推荐使用ng-bind或ng-cloak
+
+例如：
+```html
+<!-- 不推荐写法！！！-->
+<h3 class="entry-title">{{x.title}}</h3>
+```
+改为：
+```html
+<h3 class="entry-title" ng-cloak>{{x.title}}</h3>
+```
+或
+```html
+<h3 class="entry-title" ng-bind="x.title"></h3>
+
+<p class="entry-excerpt" ng-bind="x.description"></p>
+```
+
 #### Angular表达式可以如何使用？
 
 类似于 JavaScript 表达式，AngularJS 表达式可以包含**字母、操作符、变量**；
