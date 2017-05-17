@@ -2,7 +2,7 @@
 title: two version xcode in osx
 date: 2017-03-20 23:12:05
 tags: [xcode, MacOSX]
-categories: sduty
+categories: study
 description: MacOSX 共存多版本Xcode
 ---
 
