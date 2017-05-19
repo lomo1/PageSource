@@ -77,9 +77,19 @@ gulp.task('minifyImages', function() {
         .pipe(gulp.dest('./public/img'));
 });
 
+// gulp.task('watch', function() {
+//     gulp.watch('./source/**/*', function() {
+//         console.log("====== 文件更新了... 重新build。。。 ======");
+//         runSequence('clean', 'compile', 'minifyCss', 'minifyHtml', 'minifyJS', 'minifyImages');
+//     });
+// });
 
 gulp.task('default', function() {
     runSequence('clean', 'compile', 'minifyCss', 'minifyHtml', 'minifyJS', 'minifyImages', 'startServer');
+    gulp.watch('./source/**/*', function() {
+        console.log("====== 文件更新了... 重新build。。。 ======");
+        runSequence('compile', 'minifyCss', 'minifyHtml', 'minifyJS', 'minifyImages');
+    });
 });
 
 
