@@ -139,3 +139,30 @@ REQUIRE_SIGNIN_VIEW    = true
 
 ![img](http://oluzh4sa6.bkt.clouddn.com/GitHubPages/article/gogs_upgrade_bk.png)
 
+7. push
+
+当push文件较大时，提示错误
+
+```bash
+error: RPC failed; HTTP 413 curl 22 The requested URL returned error: 413 Request Entity Too Large
+fatal: The remote end hung up unexpectedly
+....
+fatal: The remote end hung up unexpectedly
+```
+
+解决办法：
+使用ssh地址。
+
+git remote remove xx(http://开头的)
+
+git remote add xxx2(ssh地址)
+
+
+或：
+
+修改Nginx配置, 使其支持大文件传输：
+
+`client_max_body_size 50m;`
+
+参考：
+http://stackoverflow.com/questions/7489813/github-push-error-rpc-failed-result-22-http-code-413/15021750#15021750
