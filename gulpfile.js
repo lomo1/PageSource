@@ -1,113 +1,115 @@
 var gulp = require('gulp');
+var shell = require('gulp-shell');
 
-var HEXO = require('./hexoAutoDoSth');
+var minifycss = require('gulp-minify-css');
+var uglify = require('gulp-uglify');
+var htmlmin = require('gulp-htmlmin');
+var removeEmptyLines = require('gulp-remove-empty-lines');
+var htmlclean = require('gulp-htmlclean');
+var imagemin = require('gulp-imagemin');
 
-var livereload = require('gulp-livereload');
+var runSequence = require('run-sequence');
 
-var browserSync = require('browser-sync').create();
+var Hexo = require('hexo');
+var hexo = new Hexo(process.cwd(), {});
 
-var reload = browserSync.reload;
+// Clean old files -- /public/*
+gulp.task('clean', shell.task([
+    'echo "====== 开始清除本地旧的文件📃 及其文件夹📂 ... =======" ',
+    'hexo clean'
+]));
+// Generate new files -- /publick/*
+gulp.task('compile', shell.task([
+    'echo "====== 重新生成新的博客相关资源文件📃 ... =======" ',
+    'hexo generate'
+]));
+// Start local server
+gulp.task('startServer', shell.task([
+    'echo "====== 开启本地服务Server并自动打开浏览器 ... =======" ',
+    'hexo s -o'
+]));
+// Auto Deploy
+gulp.task('deploy', shell.task([
+    'echo "====== 开始自动部署博客资源文件到GitHubPages ... =======" ',
+    'hexo deploy'
+]));
 
-//定义多个单独任务
-
-gulp.task('Clear', function() {
-    console.log(" 开始清除本地旧的public文件...");
-    HEXO.clear();
+// Compress CSS
+gulp.task('minifyCss', function() {
+    console.log("====== 开始自动压缩CSS资源文件... ... =======");
+    return gulp.src('./public/**/*.css')
+        .pipe(minifycss())
+        .pipe(gulp.dest('./public'));
+});
+// Compress HTML
+gulp.task('minifyHtml', function() {
+    console.log("====== 开始自动压缩HTML资源文件... ... =======");
+    return gulp.src('./public/**/*.html')
+        .pipe(htmlclean())
+        .pipe(removeEmptyLines())
+        .pipe(htmlmin({
+            removeComments: true,
+            minifyJS: true,
+            minifyCSS: true,
+            minifyURLs: true,
+            removeEmptyAttributes: true,
+            collapseWhitespace: true
+        }))
+        .pipe(gulp.dest('./public'));
+});
+// Compress JavaScript
+gulp.task('minifyJS', function() {
+    console.log("====== 开始自动压缩JavaScript资源文件... ... =======");
+    return gulp.src('./public/**/*.js')
+        .pipe(uglify())
+        .pipe(gulp.dest('./public'));
+});
+// Compress Image
+gulp.task('minifyImages', function() {
+    console.log("====== 开始自动压缩图片资源文件... ... =======");
+    gulp.src('./public/img/**/*.*')
+        .pipe(imagemin({
+            optimizationLevel: 5, //类型：Number  默认：3  取值范围：0-7（优化等级）
+            progressive: true, //类型：Boolean 默认：false 无损压缩jpg图片
+            interlaced: false, //类型：Boolean 默认：false 隔行扫描gif进行渲染
+            multipass: false, //类型：Boolean 默认：false 多次优化svg直到完全优化
+        }))
+        .pipe(gulp.dest('./public/img'));
 });
 
-gulp.task('Generate', function() {
-    console.log(" 重新生成本地静态文件[public] ...");
-    HEXO.generate();
+
+gulp.task('default', function() {
+    runSequence('clean', 'compile', 'minifyCss', 'minifyHtml', 'minifyJS', 'minifyImages', 'startServer');
 });
+
+
+// =============================================================================
+// 
+// =============================================================================
 
 /**
- * Hexo 提供本地Server服务
+ * Hexo 官方API
+ * https://hexo.io/zh-cn/api/index.html
+ * Deprecated
  */
-gulp.task('StartServer', function() {
-    console.log(" 开启本地服务器...");
-    HEXO.startServer();
+gulp.task('cleans', function() {
+    return hexo.init().then(function() {
+        hexo.call('clean', {}).then(function() {
+            return hexo.exit();
+        }).catch(function(err) {
+            return hexo.exit(err);
+        });
+    });
 });
 
-gulp.task('Deploy', function() {
-    console.log(" 开始将本地静态文件推送至远程服务器...");
-    HEXO.deployTo();
-});
-
-/** Deprecated */
-gulp.task('BrowserSync', function() {
-    HEXO.browserSync(); //Todo
-});
-
-/** 监听public文件夹下的所有文件，一旦有变更立刻刷新页面展示最新修改效果 */
-gulp.task('serve', function() {
-
-    browserSync.init({
-        server: {
-            baseDir: "./public"
-        }
+gulp.task('compiles', function() {
+    return hexo.init().then(function() {
+        hexo.call('generate', {}).then(function() {
+            return hexo.exit();
+            //hexo.call('server', {});
+        }).catch(function(err) {
+            return hexo.exit(err);
+        });
     });
 
-    gulp.watch("**").on("change", reload);
 });
-
-//Gulp -- Default 方法
-gulp.task('default', function() {
-    gulp.run('Clear', 'Generate', 'StartServer', 'serve');
-
-    gulp.watch("./source/*", function() {
-        console.log("  Blog .md源文件已发生变更...即刻开始重新Build生成并更新页面内容...");
-        gulp.run('Generate');
-
-    });
-
-    gulp.watch(['./themes/jacman/_config.yml', './themes/jacman/source', './themes/jacman/layout'], function() {
-        console.log("  主题Themes相关配置源文件已发生变更...即刻开始重新Build生成并更新页面样式、内容...");
-        gulp.run('Generate');
-    });
-
-    // gulp.watch("./public/*", function() {
-    //     console.log("public变化了.......!!!!!");
-    // }).on("change", reload);
-
-});
-
-gulp.task('help', function() {
-    console.log("=========================Gulp Help Start==========================");
-    console.log("   gulp Clear       ==> 清除本地已有静态文件和db.json文件    ");
-    console.log("   gulp Generate    ==> 重新生成静态页面文件和db.json文件    ");
-    console.log("   gulp StartServer ==> 启动Hexo提供的本地server服务，默认端口号为: 4000");
-    console.log("   gulp Deploy      ==> 将最新生成的静态页面文件全部部署到远程Server    ");
-    console.log("   gulp BrowserSync ==> 基于Browser-Sync的本地服务，默认端口号为: 3000[必须先生成静态文件]");
-    console.log("   gulp  ==> 默认方法, 清理、生成最新文件、启动server、自动刷新、实时查看最新修改的内容、主题样式等");
-    console.log("=========================Gulp Help Ending==========================")
-});
-
-
-/** 使用gulp-livereload 监控文件变化 */
-// gulp.task('reload', function(){
-//     // livereload.listen();
-//     var server = livereload();
-//     gulp.watch('source/_posts/*.md', function(file){
-//         server.changed(file.path);
-//         console.log("有文件变更了......");
-//     });
-// });
-// gulp.task('reload', function(){
-//     gulp.src('public/*').pipe(livereload());
-// });
-// gulp.task('reloadAuto', function(){
-//     livereload.listen();
-//     gulp.watch('public/*', ['reload']);
-// });
-
-
-/** 使用Browser-Sync 的Proxy 代理模式 */
-// gulp.task('browser-sync-proxy', function(){
-//     browserSync.init({
-//         proxy: "http://localhost:4000"
-//     });
-// });
-//需要task 顺序执行，尤其是保证Generate先生成，可以使用run-sequence, npm install --save-dev run-sequence
-
-//本机apache根目录设置为: /Users/lomo/Sites/
-//将Blog整个目录放入机器的Apache等服务目录下，不用hexo开启server，使用browser-sync启动并监听，当.md文件变化时，自动执行hexo g然后刷新页面
