@@ -2,7 +2,7 @@
 title: jquery get data from table
 date: 2016-04-08 00:44:36
 tags: [jquery, js]
-categories: [study,code]
+categories: program
 description: 使用jQuery获取表格行首列数据
 ---
 
