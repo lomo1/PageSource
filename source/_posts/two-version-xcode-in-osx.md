@@ -16,7 +16,7 @@ description: MacOSX 共存多版本Xcode
 
 Xcode最新按照正常流程更新即可.
 
-安装完毕后，即可秦松切换Xcode版本， 使用`xcode-select`命令完成
+安装完毕后，即可轻松切换Xcode版本， 使用`xcode-select`命令完成
 ```bash
 lomo@LomodeMacBook-Pro:~ % xcode-select -h
 Usage: xcode-select [options]
