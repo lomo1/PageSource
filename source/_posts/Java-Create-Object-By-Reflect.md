@@ -2,7 +2,7 @@
 title: Java Create Object By Reflect
 date: 2016-10-14 18:40:41
 tags: [java, reflect]
-categories: [study,program]
+categories: program
 description: 通过Java反射创建类实例
 ---
 
