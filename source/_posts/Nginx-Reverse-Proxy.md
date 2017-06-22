@@ -1,7 +1,7 @@
 ---
 title: Nginx Reverse Proxy
 date: 2016-10-13 00:00:40
-tags: nginx
+tags: [nginx]
 categories: study
 description: 使用Nginx进行反向代理
 ---
