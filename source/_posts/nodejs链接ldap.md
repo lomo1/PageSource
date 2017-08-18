@@ -164,6 +164,12 @@ verify();
     <img src="http://oluzh4sa6.bkt.clouddn.com/GitHubPages/article/ldapAuthTest.png" width="75%" height="80"></img>
 </div>
 
+`POSTMAN` 测试：
+
+<div align="center">
+    <img src="http://oluzh4sa6.bkt.clouddn.com/GitHubPages/article/postmantest.png" width="75%" height="80"></img>
+</div>
+
 ### 参考
 
 http://www.jb51.net/article/72954.htm
