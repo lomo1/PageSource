@@ -173,3 +173,12 @@ verify();
 ### 参考
 
 http://www.jb51.net/article/72954.htm
+
+`async/await` 
+
+https://cnodejs.org/topic/5640b80d3a6aa72c5e0030b6
+
+http://www.ruanyifeng.com/blog/2015/05/async.html
+
+http://www.runoob.com/nodejs/nodejs-express-framework.html
+
