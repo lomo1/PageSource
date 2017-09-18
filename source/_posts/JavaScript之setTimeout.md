@@ -8,7 +8,7 @@ description: JavaScript的setTimeout
 
 ## JavaScript之setTimeout
 
-由`setTimeout`引发的一些了解 -> 时间循环机制、异步队列、时钟周期、执行上下文
+由`setTimeout`引发的一些了解 -> 事件循环机制、异步队列、时钟周期、执行上下文
 
 > js里常见的2个定时器：`setTimeout` 和 `setInterval`，指定一定时间后触发其第一个参数函数(异步回调函数)然后执行函数体内的代码发生一些操作、变化....
 
@@ -83,6 +83,123 @@ alert('主线程挂起！');
 
 因为alert挂起了主线程，使得当前主线程被block(同样的函数还是`prompt()`, `confirm()`)，主线程被挂起，整个当前执行js的进程进入等待状态，事件触发或代码执行都被中断，计时器也会**暂停计时** ，当主线程恢复后，余下的代码继续执行，计时器安装时钟周期重新开始计时。
 
+
+再看外国网站的例子[JakeArchibald.com]
+e.g.2
+
+```js
+console.log('script start');
+
+setTimeout(function() {
+  console.log('setTimeout');
+}, 0);
+
+//promise链式调用
+Promise.resolve().then(function() {
+  console.log('promise1');
+}).then(function() {
+  console.log('promise2');
+});
+
+console.log('script end');
+
+```
+
+> 运行输出：
+```bash
+ script start
+ script end
+ promise1
+ promise2
+ setTimeout
+```
+
+> `Promise`对象经过`resolve`后的`.then` 是异步的. 所以promise1 和 promise2的输出会在第3、4行输出；(setTimtout是因为 异步队列+系统时钟周期导致最后被执行--即当前线程空闲时)
+
+进一步修改示例
+e.g.3
+
+```js
+console.log('script start');
+
+setTimeout(function() {
+  console.log('setTimeout');
+}, 0);
+
+new Promise(function(resolve){console.log(123)}).then(function() {
+  console.log('promise1');
+}).then(function() {
+  console.log('promise2');
+});
+
+console.log('script end');
+```
+
+运行后输出：
+```bash
+script start
+123
+script end
+
+setTimeout
+```
+
+再修改：
+e.g.4
+```js
+console.log('script start');
+
+setTimeout(function() {
+  console.log('setTimeout');
+}, 0);
+
+let promise = new Promise(function(resolve, reject){
+        console.log("执行了new Promise里的resolve");
+        resolve(123);
+    });
+
+promise.then(function() {
+  console.log('promise1');
+}).then(function() {
+  console.log('promise2');
+}).then(function(){
+    console.log('promise 3');
+});
+
+console.log('script end');
+```
+
+```bash
+#输出：
+script start
+执行了new Promise里的resolve
+script end
+promise1
+promise2
+promise 3
+setTimeout
+
+```
+
+> 这是因为 `new Promise()`里接受一个函数参数`function(resolve,reject)`用来执行异步执行成功或失败后的处理逻辑。
+
+```js
+let promise = new Promise(function(resolve, reject){
+    if(value/*success */){
+        resolve(value);
+    }else{
+        reject(value);
+    }
+});
+
+promise.then(function(successValue){
+    console.log(successValue); // 此函数可以接收resolve过来的对象。此处：打印resole过来的值
+}, function(failInfo){
+    console.log(failInfo); // 打印错误信息
+});
+```
+
+> `new Promise()`里的参数函数，在代码被执行到此处时可以认为是**同步执行**的，其返回的Promise对象使用.then链式调用时其内的函数是被**异步执行**。
 
 参考:
 https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/
