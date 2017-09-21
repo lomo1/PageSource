@@ -64,7 +64,7 @@ I am word In JDB Now ~_~
 ### 💻其它
 除了工作就是玩乐，学习。
 
-PHP开发、前端开发(H5+CSS3+JS)、Java、NodeJS，都可以搞起来，恩，主要就是这几门语言熟一些。
+基于PHP的Rest ful API、前端开发(H5+CSS3+JS/jQuery/AngularJS)、Java、NodeJS，都可以搞起来。恩，主要[PHP/ng、js]就是这几门语言熟一些。[python目前会一点o(╯□╰)o 不过学起来不费劲，其它语言基础在那摆着呢🙂 ]
 
 未来想向AI、物联网方向走，有机会要去探探路，求带！！！
 
