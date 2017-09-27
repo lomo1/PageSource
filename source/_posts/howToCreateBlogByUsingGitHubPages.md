@@ -1,6 +1,6 @@
 ---
 title: 使用GitHub Pages创建个人博客
-date: 2016-06-21 23:33:02
+date: 2015-06-21 23:30:02
 tags: [blog,GitHub,Hexo]
 categories: essay # 配置categories
 description:
