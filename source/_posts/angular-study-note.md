@@ -1,7 +1,7 @@
 ---
 title: angular study note
 date: 2016-12-21 19:55:19
-tags: [angular, js]
+tags: [angularjs, js]
 categories: study
 description: AngularJS学习笔记
 ---
@@ -136,9 +136,26 @@ ng-model指令除了可以绑定HTML元素到应用程序，还可以做一些�
 
 >绑定HTML元素到HTML表单
 
-④ng-repeat 指令，克隆、复制元素
 
-⑤自定义指令
+
+⑤`ng-model`与`ng-bind`区别:
+
+```html
+<input ng-model="expression">
+
+<span ng-bind="expression"></span>
+<!-- ng-bind另一种写法 -->
+<span class="ng-bind: expression"></span>
+```
+
+`ng-bind` 是从ng的`$scope`作用域 => `view`层的**单向**数据绑定. 相当于直接在标签内使用表达式`{{expression}}`
+
+`ng-model` 是从ng作用域`$scope` <=> `view`层的**双向**数据绑定. 
+
+
+⑥ng-repeat 指令，克隆、复制元素
+
+⑦自定义指令
 > 使用`.directive` 函数添加自定义指令. 调用自定义指令，HTML元素上必须要添加自定义指令名!!!
 
 自定义指令定义规则：
