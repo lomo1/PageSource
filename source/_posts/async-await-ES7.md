@@ -3,12 +3,19 @@ title: async await ES7
 date: 2016-07-07 10:57:03
 tags: [ES7, js]
 categories: study
-description: ES7的async、await
+description: ES7的async/await
 ---
 
-## ES7之async、await
+## ES7之async/await
 
-### 概念...
+
+
+<div align="center">
+    <img src="https://tutorialzine.com/media/2017/07/async-await.png" width="80%">
+    <p>盗个图🙂 </p>
+</div>
+
+### 概念
 
 ```
 ES5 -> ECMAScript ECMAScript第五个版本
@@ -28,6 +35,16 @@ so, what ECMAScript?
 https://www.w3ctech.com/topic/1614
 
 https://huangxuan.me/2015/09/22/js-version/?utm_source=caibaojian.com
+
+
+### 浏览器支持
+
+各大浏览器支持：
+
+<div align="center">
+    <img src="https://tutorialzine.com/media/2017/07/caniuse-async-await.png" width="82%">
+</div>
+
 
 ### async/await示例
 
@@ -172,5 +189,10 @@ t.then(obj => console.log(obj.data)); //data信息
 t.then(obj => function(){alert(obj.error);}());
 
 ```
+
+
+Reference:
+> https://tutorialzine.com/2017/07/javascript-async-await-explained
+
 
 
