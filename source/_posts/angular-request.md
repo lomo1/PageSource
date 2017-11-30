@@ -319,3 +319,29 @@ app.controller('httpDemoController', function($scope, $http) {
 </body>
 </html>
 ```
+
+
+### 其它 
+
+使用jQuery的高版本(带Promise的) `ajax`请求，需要将参数以Form(key->value)形式请求时，需要添加一个参数。默认是json形式 即：`platform=1&channelType=22a` (抓包或浏览器开发者工具查看到的都是这种形式)
+
+修改为`Form Data`形式: 添加一个参数 `headers`, 然后再次请求查看浏览器 `XHR`即可看到接口请求时携带的 `Form Data`形式的参数。
+
+
+```js
+var data = {
+    a: 112,
+    b: 344,
+    c: "xx"
+};
+
+$.ajax({
+    url: xx,
+    type: 'POST',
+    data: data
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    // ....
+    // ....
+});
+
+```
