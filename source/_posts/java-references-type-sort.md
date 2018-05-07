@@ -12,7 +12,7 @@ description: Java Arrays类及引用类型排序
 
 > int 、short、float、double、long、byte、boolean、char
 
-除了其中的boolean类型外，对于其它其中定义的Arrays都可以使用自带的`.sort()`方法进行排序(默认为升序排序).
+除了其中的boolean类型外，对于其它几种定义的Arrays都可以使用自带的`.sort()`方法进行排序(默认为升序排序).
 
 
 ### 基本排序.sort()方法

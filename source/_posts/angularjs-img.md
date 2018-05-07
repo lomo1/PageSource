@@ -1,6 +1,6 @@
 ---
 title: angularjs img
-date: 2017-10-19 19:58:05
+date: 2016-10-19 19:58:05
 tags: angularjs
 categories: study
 description: Angularjs操作img地址
