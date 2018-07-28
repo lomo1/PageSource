@@ -31,49 +31,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 
 #### .dmg安装IDEA(another way)
 
-安装程序文件下载地址：
-
-`链接: https://pan.baidu.com/s/1qYNM0bi 密码: bpte`
-
-下载完，安装完毕后，进行License授权，或使用破解.jar文件替换原版文件实现本地破解。
-
-
-#### 激活IDEA
-
-> 两种方式都可以激活使用.
-
-##### License授权激活
-
-> 通常License激活有效期为**1年**
-
-```
-选择License server，输入以下任意一个地址：
-http://idea.imsxm.com/ 
-http://114.215.133.70:41017﻿/ 
-http://mcpmcc.com:1017 
-http://idea.pjoc.pub 
-http://jetbrains.tencent.click
-
-http://idea.lanyus.com/
-
-```
-
-##### 本地破解激活
-
-破解补丁下载：
-
-` http://idea.goxz.gq/jar/JetbrainsCrack-2.6.2.jar`
-
-将`.jar`文件放入APP安装目录：
-
-`/Applications/IntelliJ IDEA.app/Contents/bin` 下.
-
-打开该目录下的`idea.vmoptions`文件，首行加入：
-
-`-javaagent:/Applications/IntelliJ IDEA.app/Contents/bin/JetbrainsCrack-2.6.2.jar`
-
-重新打开IDEA即可.
-
+> 被GitHub DCMA了....
 
 IDEA官网：
 
